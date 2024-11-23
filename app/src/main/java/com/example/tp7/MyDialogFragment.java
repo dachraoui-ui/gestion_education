@@ -1,9 +1,7 @@
 package com.example.tp7;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
@@ -36,23 +34,23 @@ public class MyDialogFragment extends DialogFragment {
 
         builder.setTitle("Ajouter Nouveau Enseignant")
                 .setMessage("Donner nom enseignant")
-                .setPositiveButton("Valider", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String nomEnseignant = nom.getText().toString();
-                        String emailEnseignant = email.getText().toString();
+                .setPositiveButton("Valider", (dialog, whichButton) -> {
+                    String nomEnseignant = nom.getText().toString();
+                    String emailEnseignant = email.getText().toString();
 
-                        Teacher newTeacher = new Teacher(nomEnseignant, emailEnseignant);
-                        if (listener != null) {
-                            listener.onTeacherAdded(newTeacher);
-                        }
+                    // Creating Teacher object with name and email only (id will be auto-incremented)
+                    Teacher newTeacher = new Teacher(nomEnseignant, emailEnseignant);
+
+                    // Add teacher to database
+                    if (listener != null) {
+                        listener.onTeacherAdded(newTeacher);
                     }
                 })
-                .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // Ne rien faire
-                    }
+                .setNegativeButton("Annuler", (dialog, whichButton) -> {
+                    // Nothing to do
                 });
 
         return builder.create();
     }
 }
+

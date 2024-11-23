@@ -1,6 +1,7 @@
 package com.example.tp7;
 
 public class Teacher {
+    private int id;
     private String name;
     private String email;
 
@@ -9,6 +10,9 @@ public class Teacher {
         this.email = email;
     }
 
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }
